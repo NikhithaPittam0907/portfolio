@@ -79,7 +79,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center gap-3 group text-left cursor-pointer focus:outline-none"
           >
             <img
-              src="/nikhitha.jpg"
+              src={PERSONAL_INFO.avatarUrl}
               alt="Pittam Nikhitha"
               className="w-10 h-10 rounded-full object-cover border-2 border-cyan-400 shadow-md group-hover:scale-105 transition-transform"
             />

@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Award, 
   ExternalLink, 
@@ -7,12 +7,17 @@ import {
   Database, 
   GraduationCap, 
   Cpu, 
-  BarChart3 
+  BarChart3,
+  X,
+  FileText,
+  Download
 } from 'lucide-react';
-import { CERTIFICATIONS } from '../../data/certificationsData';
+import { CERTIFICATIONS, type Certificate } from '../../data/certificationsData';
 import { GlassCard } from '../ui/GlassCard';
 
 export const Certifications: React.FC = () => {
+  const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
+
   const getIcon = (iconName: string) => {
     switch (iconName) {
       case 'Award': return <Award size={22} className="text-red-400" />;
@@ -22,6 +27,15 @@ export const Certifications: React.FC = () => {
       case 'Cpu': return <Cpu size={22} className="text-blue-400" />;
       case 'BarChart3': return <BarChart3 size={22} className="text-emerald-400" />;
       default: return <Award size={22} className="text-purple-400" />;
+    }
+  };
+
+  const handleVerifyClick = (e: React.MouseEvent, cert: Certificate) => {
+    e.preventDefault();
+    if (cert.pdfUrl) {
+      setSelectedCert(cert);
+    } else {
+      window.open(cert.verifyUrl, '_blank', 'noopener,noreferrer');
     }
   };
 
@@ -96,21 +110,119 @@ export const Certifications: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-white/10">
+                <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                  <button
+                    onClick={(e) => handleVerifyClick(e, cert)}
+                    className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-300 hover:text-emerald-300 transition-colors bg-white/5 hover:bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-white/10 hover:border-emerald-500/30"
+                  >
+                    <FileText size={13} className="text-emerald-400" />
+                    <span>Verify Credential</span>
+                  </button>
+
                   <a
-                    href={cert.verifyUrl}
+                    href={cert.pdfUrl || cert.verifyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-emerald-300 transition-colors"
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+                    title="Open PDF in new tab"
                   >
-                    <span>Verify Credential</span>
-                    <ExternalLink size={13} />
+                    <ExternalLink size={14} />
                   </a>
                 </div>
               </GlassCard>
             </motion.div>
           ))}
         </div>
+
+        {/* PDF Modal Viewer */}
+        <AnimatePresence>
+          {selectedCert && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ duration: 0.2 }}
+                className="relative w-full max-w-5xl h-[85vh] bg-slate-900 border border-slate-700/60 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+              >
+                {/* Modal Header */}
+                <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-950/80">
+                  <div className="flex items-center gap-3 pr-4 overflow-hidden">
+                    <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 shrink-0">
+                      {getIcon(selectedCert.iconName)}
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="text-sm sm:text-base font-bold text-white truncate font-heading">
+                        {selectedCert.title}
+                      </h3>
+                      <p className="text-xs text-slate-400 font-mono truncate">
+                        {selectedCert.issuer} • ID: {selectedCert.credentialId}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 shrink-0">
+                    <a
+                      href={selectedCert.pdfUrl || selectedCert.verifyUrl}
+                      download
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono text-slate-300 bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
+                      title="Download PDF"
+                    >
+                      <Download size={14} />
+                      <span className="hidden sm:inline">Download</span>
+                    </a>
+
+                    <a
+                      href={selectedCert.pdfUrl || selectedCert.verifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 transition-colors"
+                      title="Open in new tab"
+                    >
+                      <ExternalLink size={14} />
+                      <span className="hidden sm:inline">Open in Tab</span>
+                    </a>
+
+                    <button
+                      onClick={() => setSelectedCert(null)}
+                      className="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+                      aria-label="Close modal"
+                    >
+                      <X size={18} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* PDF Viewer Body */}
+                <div className="flex-1 w-full h-full bg-slate-950 relative overflow-hidden">
+                  {selectedCert.pdfUrl ? (
+                    <iframe
+                      src={`${selectedCert.pdfUrl}#view=FitH`}
+                      className="w-full h-full border-none"
+                      title={selectedCert.title}
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center h-full text-slate-400 p-6 text-center">
+                      <FileText size={48} className="mb-4 text-emerald-400" />
+                      <p className="text-base font-semibold text-white mb-2">Certificate PDF</p>
+                      <p className="text-xs text-slate-400 mb-6">
+                        Click below to verify credential on official website.
+                      </p>
+                      <a
+                        href={selectedCert.verifyUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 rounded-lg bg-emerald-500 text-slate-950 font-semibold text-xs font-mono"
+                      >
+                        Verify Credential
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );

@@ -1,3 +1,5 @@
+import profileImg from '../assets/nikhitha.jpg';
+
 export interface ExperienceItem {
   id: string;
   role: string;
@@ -39,7 +41,7 @@ export const PERSONAL_INFO = {
   cgpa: "9.2 / 10.0",
   university: "Saveetha Institute of Medical and Technical Sciences (SIMATS)",
   degree: "B.E. Computer Science Engineering (Artificial Intelligence)",
-  avatarUrl: "/nikhitha.jpg",
+  avatarUrl: profileImg,
   github: "https://github.com/NikhithaPittam0907",
   linkedin: "https://www.linkedin.com/in/pittamnikhitha/",
   leetcode: "https://leetcode.com/u/PittamNikhitha/",

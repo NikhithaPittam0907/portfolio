@@ -27,7 +27,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
           <div className="flex items-center justify-between p-6 border-b border-white/10 bg-white/[0.02]">
             <div className="flex items-center gap-3">
               <img
-                src="/nikhitha.jpg"
+                src={PERSONAL_INFO.avatarUrl}
                 alt="Pittam Nikhitha"
                 className="w-10 h-10 rounded-full object-cover border-2 border-cyan-400"
               />

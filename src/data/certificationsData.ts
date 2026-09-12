@@ -8,73 +8,68 @@ export interface Certificate {
   badgeColor: string;
   skills: string[];
   verifyUrl: string;
+  pdfUrl?: string;
 }
 
 export const CERTIFICATIONS: Certificate[] = [
   {
     id: "oracle-java",
-    title: "Oracle Certified Associate, Java SE Programmer",
+    title: "Oracle Certified Professional: Java SE 17 Developer",
     issuer: "Oracle Corporation",
-    issueDate: "2024",
-    credentialId: "OCA-JAVA-SE-8921",
+    issueDate: "July 2025",
+    credentialId: "101984392OCPJSE17",
     iconName: "Award",
     badgeColor: "#F80000",
-    skills: ["Java SE", "OOP Design", "Exception Handling", "Java Collections", "Multithreading"],
-    verifyUrl: "https://education.oracle.com/verify"
+    skills: ["Java SE 17", "OOP Design", "Exception Handling", "Java Collections", "Multithreading", "Stream API"],
+    verifyUrl: "/certificates/oracle-java-se-17-certificate.pdf",
+    pdfUrl: "/certificates/oracle-java-se-17-certificate.pdf"
   },
   {
     id: "oracle-database",
-    title: "Oracle Database SQL Certified Associate",
+    title: "Oracle Database SQL Certified Specialist",
     issuer: "Oracle Corporation",
-    issueDate: "2024",
-    credentialId: "ORA-DB-SQL-4402",
+    issueDate: "July 2025",
+    credentialId: "101984392OCSSQL12C",
     iconName: "Database",
     badgeColor: "#F80000",
-    skills: ["Relational Databases", "Complex SQL Queries", "DDL/DML", "Subqueries & Joins", "Indexing"],
-    verifyUrl: "https://education.oracle.com/verify"
+    skills: ["Relational Databases", "Complex SQL Queries", "DDL/DML", "Subqueries & Joins", "Indexing & Optimization"],
+    verifyUrl: "/certificates/oracle-sql-specialist-certificate.pdf",
+    pdfUrl: "/certificates/oracle-sql-specialist-certificate.pdf"
+  },
+  {
+    id: "nptel-neural-networks",
+    title: "NPTEL Elite Certification: Neural Networks for Computer Vision & NLP",
+    issuer: "NPTEL / IIT Guwahati",
+    issueDate: "Jan-Apr 2026",
+    credentialId: "NPTEL26CS04S1450307182",
+    iconName: "Sparkles",
+    badgeColor: "#7C3AED",
+    skills: ["Neural Networks", "Computer Vision", "Natural Language Processing", "Deep Learning", "PyTorch/TensorFlow"],
+    verifyUrl: "/certificates/neural-networks-nlp-certificate.pdf",
+    pdfUrl: "/certificates/neural-networks-nlp-certificate.pdf"
+  },
+  {
+    id: "nptel-iot",
+    title: "NPTEL Elite Certification: Introduction to Internet of Things",
+    issuer: "NPTEL / IIT Kharagpur",
+    issueDate: "Jul-Oct 2025",
+    credentialId: "NPTEL25CS147S1054006050",
+    iconName: "Cpu",
+    badgeColor: "#3B82F6",
+    skills: ["Sensory Networks", "Microcontrollers", "MQTT Protocol", "IoT Architecture", "Embedded Systems"],
+    verifyUrl: "/certificates/iot-certificate.pdf",
+    pdfUrl: "/certificates/iot-certificate.pdf"
   },
   {
     id: "nptel-ml",
-    title: "NPTEL National Certification: Machine Learning",
-    issuer: "NPTEL / IIT Kharagpur",
-    issueDate: "2024",
-    credentialId: "NPTEL24CS55S12",
+    title: "NPTEL National Certification: Introduction to Machine Learning",
+    issuer: "NPTEL / IIT Madras",
+    issueDate: "Jul-Oct 2025",
+    credentialId: "NPTEL25CS91S354004755",
     iconName: "GraduationCap",
     badgeColor: "#06B6D4",
-    skills: ["Supervised Learning", "Support Vector Machines", "Neural Networks", "Gradient Boosting"],
-    verifyUrl: "https://nptel.ac.in/noc"
-  },
-  {
-    id: "generative-ai",
-    title: "Generative AI & Large Language Model Engineering",
-    issuer: "DeepLearning.AI",
-    issueDate: "2024",
-    credentialId: "DL-GENAI-9012",
-    iconName: "Sparkles",
-    badgeColor: "#7C3AED",
-    skills: ["RAG Architecture", "Prompt Engineering", "LangChain", "Vector Indexing", "LLM Fine-Tuning"],
-    verifyUrl: "https://coursera.org/verify"
-  },
-  {
-    id: "iot-specialization",
-    title: "Internet of Things (IoT) & Embedded Systems",
-    issuer: "NPTEL / University Specialization",
-    issueDate: "2023",
-    credentialId: "IOT-SPEC-3109",
-    iconName: "Cpu",
-    badgeColor: "#3B82F6",
-    skills: ["Sensory Networks", "Microcontrollers", "MQTT Protocol", "Embedded C/Python", "IoT Security"],
-    verifyUrl: "https://nptel.ac.in/noc"
-  },
-  {
-    id: "data-science",
-    title: "Advanced Data Science & Predictive Analytics",
-    issuer: "IBM / NPTEL",
-    issueDate: "2023",
-    credentialId: "IBM-DS-7781",
-    iconName: "BarChart3",
-    badgeColor: "#10B981",
-    skills: ["Pandas & NumPy", "Data Visualization", "Statistical Analysis", "Predictive Modeling"],
-    verifyUrl: "https://ibm.com/training/badges"
+    skills: ["Supervised Learning", "Support Vector Machines", "Decision Trees", "Gradient Boosting", "Model Evaluation"],
+    verifyUrl: "/certificates/machine-learning-certificate.pdf",
+    pdfUrl: "/certificates/machine-learning-certificate.pdf"
   }
 ];

@@ -72,57 +72,53 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResumeModal, onOpenAiAssistant
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          {/* Left Column: Unique Apple/Vercel Luxury Glass Portrait Card */}
+          {/* Left Column: Passport Size Luxury Glass Photo Card */}
           <motion.div
             initial={{ opacity: 0, scale: 0.92, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
             className="lg:col-span-5 flex justify-center"
           >
-            <div className="relative w-full max-w-md">
+            <div className="relative w-full max-w-[220px] sm:max-w-[240px]">
               {/* Outer Glowing Border Frame */}
-              <div className="absolute -inset-1 rounded-[32px] bg-gradient-to-tr from-purple-600 via-cyan-400 to-blue-600 opacity-60 blur-lg group-hover:opacity-100 transition duration-1000" />
+              <div className="absolute -inset-1 rounded-[24px] bg-gradient-to-tr from-purple-600 via-cyan-400 to-blue-600 opacity-60 blur-lg group-hover:opacity-100 transition duration-1000" />
               
-              <GlassCard className="relative p-4 rounded-[30px] border border-white/15 bg-[#080c1d]/90 backdrop-blur-2xl shadow-2xl overflow-hidden">
-                {/* Photo Frame Container */}
-                <div className="relative w-full aspect-[4/5] rounded-[22px] overflow-hidden border border-white/10 bg-slate-900 shadow-inner">
+              <GlassCard className="relative p-2.5 rounded-[22px] border border-white/15 bg-[#080c1d]/90 backdrop-blur-2xl shadow-2xl overflow-hidden">
+                {/* Photo Frame Container - Passport Photo Format */}
+                <div className="relative w-full aspect-[3.5/4.5] rounded-[16px] overflow-hidden border border-white/15 bg-slate-900 shadow-inner">
                   <img
-                    src="/nikhitha.jpg"
+                    src={PERSONAL_INFO.avatarUrl}
                     alt="Pittam Nikhitha"
-                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                    style={{
-                      objectPosition: 'center 38%',
-                      transform: 'scale(1.18)'
-                    }}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.03]"
                   />
                   
                   {/* Subtle Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050816] via-transparent to-transparent opacity-80" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050816] via-transparent to-transparent opacity-60 pointer-events-none" />
 
                   {/* Badge overlay at bottom of photo */}
-                  <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-white/[0.08] backdrop-blur-xl border border-white/15 flex items-center justify-between">
+                  <div className="absolute bottom-2 left-2 right-2 p-2 rounded-lg bg-white/[0.12] backdrop-blur-xl border border-white/20 flex items-center justify-between">
                     <div>
-                      <h3 className="font-heading font-bold text-white text-sm">
+                      <h3 className="font-heading font-bold text-white text-[11px] leading-tight">
                         {PERSONAL_INFO.name}
                       </h3>
-                      <p className="text-[11px] font-mono text-cyan-300">
-                        Saveetha CSE (AI) • 9.2 CGPA
+                      <p className="text-[9px] font-mono text-cyan-300">
+                        CGPA 9.2
                       </p>
                     </div>
-                    <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+                    <span className="px-1.5 py-0.5 rounded-full text-[8px] font-mono font-bold bg-cyan-500/25 text-cyan-300 border border-cyan-500/40">
                       VERIFIED
                     </span>
                   </div>
                 </div>
 
                 {/* Quick Profile Summary Footer */}
-                <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-slate-300">
-                  <div className="flex items-center gap-1.5 font-mono text-[11px]">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>Open to SWE & AI Roles</span>
+                <div className="mt-2 pt-2 border-t border-white/10 flex items-center justify-between text-xs text-slate-300">
+                  <div className="flex items-center gap-1.5 font-mono text-[9px]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>Open to Roles</span>
                   </div>
-                  <span className="font-mono text-[11px] text-purple-300">
-                    Nandyal, India
+                  <span className="font-mono text-[9px] text-purple-300">
+                    Nandyal, IN
                   </span>
                 </div>
               </GlassCard>
